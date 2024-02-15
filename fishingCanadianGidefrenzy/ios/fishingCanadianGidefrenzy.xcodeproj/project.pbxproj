@@ -468,8 +468,9 @@
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-fishingCanadianGidefrenzy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = LN96MYWKJR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = fishingCanadianGidefrenzy/Info.plist;
@@ -479,7 +480,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -498,8 +499,9 @@
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-fishingCanadianGidefrenzy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = LN96MYWKJR;
 				INFOPLIST_FILE = fishingCanadianGidefrenzy/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Canadian Gidefrenzy";
@@ -508,7 +510,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
