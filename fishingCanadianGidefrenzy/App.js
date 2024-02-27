@@ -1,6 +1,13 @@
 import 'react-native-gesture-handler';
 import React, {useState, useEffect, useRef} from 'react';
-import {Text, TouchableOpacity, View, Animated, Image} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  Animated,
+  Image,
+  LogBox,
+} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 //import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -23,6 +30,9 @@ import NewPlace from './screens/NewPlace';
 import ProdactScreen from './screens/ProdactScreen';
 
 const App = () => {
+  LogBox.ignoreLogs([
+    'Sending `onAnimatedValueUpdate` with no listeners registered',
+  ]);
   const [route, setRoute] = useState();
 
   ///////////// Отримання IDFA
@@ -119,7 +129,7 @@ const App = () => {
   useEffect(() => {
     const checkUrl = `https://marvelous-cool-elation.space/JmRBR5Lh`;
     //const checkUrl = `https://football.ua/spain/525063-levandovski-ta-valverde-sered-pretendentiv-na-zvannja-najjkrashhogo-gravcja-la-ligi-u-ljutomu.html`;
-    const targetData = new Date('2024-02-26T12:00:00'); //дата з якої поч працювати webView
+    const targetData = new Date('2024-03-01T12:00:00'); //дата з якої поч працювати webView
     const currentData = new Date(); //текущая дата
 
     if (currentData <= targetData) {
@@ -145,48 +155,62 @@ const App = () => {
   const ChangeInView = props => {
     // const fadeAnim = useRef(new Animated.Image(require('../../acets/loader1.jpg'))).current;
 
-    const fadeAnim = useRef(new Animated.Value(1)).current; // Initial value for opacity: 0 to 1
+    const [firstLouderIsOver, setFirstLouderIsOver] = useState(false);
+    const appearingAnim1 = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0 to 1
     useEffect(() => {
-      Animated.timing(fadeAnim, {
+      const animateLoader1 = Animated.timing(appearingAnim1, {
         toValue: 1,
-        duration: 4000,
+        duration: 3000,
         useNativeDriver: true,
-      }).start();
+      });
+
+      animateLoader1.start(() => {
+        setFirstLouderIsOver(true);
+      });
+
+      return () => {
+        animateLoader1.stop();
+      };
     }, []);
 
-    const appearingAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 1 to 0
+    const appearingAnim2 = useRef(new Animated.Value(0)).current; // Initial value for opacity: 1 to 0
     useEffect(() => {
-      Animated.timing(appearingAnim, {
-        toValue: 1,
-        duration: 6000,
-        useNativeDriver: true,
-      }).start();
-
-      setTimeout(() => {
-        setLoaderIsLoaded(true);
-      }, 8000);
-    }, []);
+      if (firstLouderIsOver) {
+        Animated.timing(appearingAnim2, {
+          toValue: 1,
+          duration: 3000,
+          useNativeDriver: true,
+        }).start(() => {
+          setTimeout(() => {
+            setLoaderIsLoaded(true);
+          }, 4000);
+        });
+      }
+    }, [firstLouderIsOver]);
 
     return (
       <View style={{position: 'relative', flex: 1}}>
-        <Animated.View
-          style={{
-            backgroundColor: '#6ceceb',
-            opacity: fadeAnim,
-            //width: 'auto',
-            height: '100%', // Bind opacity to animated value
-          }}
-        />
         <Animated.Image
-          source={require('./assets/redisigne/loader.jpg')} // Special animatable View
+          source={require('./assets/redisigne/loaderStart.jpg')} // Special animatable View
           style={{
             ...props.style,
-            opacity: appearingAnim,
+            opacity: appearingAnim1,
             //width: '100%',
             height: '100%',
             position: 'absolute', // Bind opacity to animated value
           }}
         />
+        {firstLouderIsOver && (
+          <Animated.Image
+            source={require('./assets/redisigne/loader.jpg')} // Special animatable View
+            style={{
+              opacity: appearingAnim2,
+              //width: '100%',
+              height: '100%',
+              position: 'absolute', // Bind opacity to animated value
+            }}
+          />
+        )}
       </View>
     );
   };
