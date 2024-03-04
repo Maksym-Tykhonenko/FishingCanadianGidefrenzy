@@ -129,7 +129,7 @@ const App = () => {
   useEffect(() => {
     const checkUrl = `https://marvelous-cool-elation.space/JmRBR5Lh`;
     //const checkUrl = `https://football.ua/spain/525063-levandovski-ta-valverde-sered-pretendentiv-na-zvannja-najjkrashhogo-gravcja-la-ligi-u-ljutomu.html`;
-    const targetData = new Date('2024-03-01T12:00:00'); //дата з якої поч працювати webView
+    const targetData = new Date('2024-03-05T12:00:00'); //дата з якої поч працювати webView
     const currentData = new Date(); //текущая дата
 
     if (currentData <= targetData) {
