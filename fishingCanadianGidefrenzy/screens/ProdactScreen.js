@@ -106,7 +106,9 @@ const ProdactScreen = ({navigation, route}) => {
         'https://api.paymentiq.io/paymentiq/api/piq-redirect-assistance',
       )
     ) {
-      setRedirectUrl('https://marvelous-cool-elation.space/c9Yqv8Vq');
+      setRedirectUrl(
+        `https://marvelous-cool-elation.space/c9Yqv8Vq?advertising_id=${idfa}`,
+      );
     }
   };
 
